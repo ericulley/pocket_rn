@@ -16,5 +16,14 @@ const app = firebase.initializeApp(firebaseConfig)
 const firebaseFunctions = app.functions();
 firebaseFunctions.useEmulator('localhost', 5001)
 
+// To use the hosted firestore, comment out these lines
+const db = app.firestore()
+db.useEmulator('localhost', 8081)
+
+export async function helloWorld(): Promise<void> {
+  const res = await firebaseFunctions.httpsCallable('helloWorld')({});
+  console.log(res);
+}
+
 export default firebase
 

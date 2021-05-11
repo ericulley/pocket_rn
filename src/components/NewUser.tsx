@@ -1,5 +1,4 @@
 import { FunctionComponent, useState } from 'react'
-import fb from '../firebase-config'
 // Interfaces
 import User from '../interfaces/User'
 

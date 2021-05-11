@@ -1,17 +1,18 @@
 import { FunctionComponent, useEffect, useState } from 'react'
-import fb from '../firebase-config'
+import firebase from "../firebase-config"
 // Interfaces
 import User from '../interfaces/User'
 
 const Home: FunctionComponent = () => {
 
-    const [allUsers, setAllUsers] = useState<User[] | fb.firestore.DocumentData[]>([])
+    const [allUsers, setAllUsers] = useState<any[]>([])
 
-    const usersRef = fb.firestore().collection('users')
+    const db = firebase.firestore()
+    const usersRef = db.collection('users')
 
     const getAllUsers = () => {
         usersRef.onSnapshot((querySnapShot) => {
-            const users: fb.firestore.DocumentData[] = []
+            const users: any[] = []
             querySnapShot.forEach((doc) => {
                 console.log(doc.data())
                 users.push(doc.data())
@@ -34,14 +35,7 @@ const Home: FunctionComponent = () => {
                         <details>
                             <summary>Available Times</summary>
                             <ul>
-                                {user.availableTimes.map((time: string) => {
-                                    return (
-                                        <li>
-                                            <p>{time}</p>
-                                            <button>book</button>
-                                        </li>
-                                    )
-                                })}
+                                times
                             </ul>
                         </details>
                     </div>
